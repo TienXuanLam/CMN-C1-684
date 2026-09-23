@@ -1,0 +1,47 @@
+[project]
+name = "cmn-c1-684"
+version = "1.0.0"
+description = "AgentHealthResourceMonitorAgent — AgentCore Template"
+requires-python = ">=3.11"
+# agenticstar-agentcore is installed from the package registry --
+# pinned directly here like every other runtime dependency.
+# marketplace provides the runner (shared.bootstrap.marketplace_app, used by
+# cli.py). openai is pinned fleet-wide for dependency-set consistency even
+# though this agent makes no LLM calls itself -- it is never imported in src/.
+dependencies = [
+    "agenticstar-agentcore[marketplace,openai]==1.0.3",
+    "pyyaml==6.0.1",
+    "psutil==6.1.1",
+    "requests==2.34.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==9.0.3",
+    "pytest-cov==5.0.0",
+    "pytest-asyncio==1.4.0",
+    "ruff==0.4.4",
+    "mypy==1.10.0",
+]
+# pynvml is optional (GPU metrics only) — proposal §11 Risk #5: absence is
+# handled with a graceful N/A fallback, not an import-time failure.
+gpu = [
+    "pynvml==12.0.0",
+]
+
+[build-system]
+requires = ["setuptools==68.0.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+disallow_subclassing_any = false
+
+[[tool.mypy.overrides]]
+module = ["framework.*", "shared.*", "pynvml", "psutil"]
+ignore_missing_imports = true

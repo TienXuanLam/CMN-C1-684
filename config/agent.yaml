@@ -1,0 +1,21 @@
+# Agent Manifest — AgentRegistry entry point
+id: "CMN-C1-684"
+name: "AgentHealthResourceMonitorAgent"
+namespace: "cmn"
+version: "1.0.0"
+enabled: true
+category: "Cat 1"
+generation_mode: "deterministic"
+industry: "CMN"
+
+# Compatibility metadata only; runtime inheritance is defined by the class.
+base_type: "AgentBaseGraph"
+
+# AgentRegistry expects one complete dotted import path.
+class: "src.graph.graph.AgentHealthResourceMonitorAgent"
+
+required_trust_level: "VERIFIED_EXTERNAL"
+
+requires:
+  secrets: []
+  extras: []

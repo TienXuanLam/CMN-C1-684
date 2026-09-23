@@ -1,0 +1,9 @@
+# Runtime parameters — loaded by the framework at agent construction time,
+# accessible as self.config. Distinct from config/agent.yaml (static manifest).
+# See concepts/config-and-secrets.md.
+
+max_retry: 3
+memory_enabled: false
+timeout_s: 30
+hitl:
+  enabled: false
